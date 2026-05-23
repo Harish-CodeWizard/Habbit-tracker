@@ -1,1 +1,30 @@
-// prisma schema placeholder
+generator client {
+	provider = "prisma-client-js"
+}
+
+datasource db {
+	provider = "postgresql"
+	url      = env("DATABASE_URL")
+}
+
+model User {
+	id        Int      @id @default(autoincrement())
+	name      String
+	email     String   @unique
+	password  String
+	habits    Habit[]
+	createdAt DateTime @default(now())
+}
+
+model Habit {
+	id          Int      @id @default(autoincrement())
+	title       String
+	description String?
+	streak      Int      @default(0)
+	completed   Boolean  @default(false)
+
+	userId Int
+	user   User @relation(fields: [userId], references: [id])
+
+	createdAt DateTime @default(now())
+}

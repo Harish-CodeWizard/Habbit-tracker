@@ -1,2 +1,3 @@
-// helpers placeholder
-export function noop() {}
+export function cn(...classes: (string | undefined | null | false)[]) {
+	return classes.filter(Boolean).join(' ');
+}
