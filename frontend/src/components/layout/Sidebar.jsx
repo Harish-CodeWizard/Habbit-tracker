@@ -10,17 +10,18 @@ const navItems = [
 ];
 
 const Sidebar = () => (
-  <aside className="hidden md:flex flex-col w-20 h-screen bg-white/80 backdrop-blur border-r border-gray-200 shadow-lg py-4 items-center space-y-8 fixed left-0 top-0 z-40">
+  <aside className="hidden md:flex flex-col w-20 h-screen bg-white/90 backdrop-blur border-r border-gray-100 shadow-sm py-4 items-center space-y-6 fixed left-0 top-0 z-40">
     {navItems.map((item) => (
       <NavLink
         key={item.to}
         to={item.to}
+        title={item.label}
+        aria-label={item.label}
         className={({ isActive }) =>
-          `flex flex-col items-center text-xs transition-colors duration-200 ${isActive ? 'text-primary' : 'text-gray-500'}`
+          `flex flex-col items-center text-xs transition-colors duration-200 ${isActive ? 'text-violet-600' : 'text-gray-500'}`
         }
       >
-        {item.icon}
-        <span>{item.label}</span>
+        <div className="p-2 rounded-md hover:bg-violet-50">{item.icon}</div>
       </NavLink>
     ))}
   </aside>
