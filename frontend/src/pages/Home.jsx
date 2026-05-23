@@ -1,4 +1,5 @@
-// Home page placeholder
+import LandingPage from './LandingPage';
+
 export default function Home() {
-  return <div>Home Page</div>;
+  return <LandingPage />;
 }
