@@ -7,36 +7,39 @@ import {
 } from "lucide-react";
 import { FaGoogle, FaApple } from "react-icons/fa";
 
-export default function Login() {
+export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-[#0B0B0F] text-white overflow-hidden relative flex items-center justify-center px-4">
+    <div className="h-screen overflow-hidden bg-[#0B0B0F] text-white flex items-center justify-center px-4 relative">
 
       {/* Background Glow */}
-      <div className="absolute top-[-150px] left-[-100px] w-[350px] h-[350px] bg-blue-500/10 blur-[120px] rounded-full"></div>
+      <div className="absolute top-[-120px] left-[-120px] w-[320px] h-[320px] bg-blue-500/10 rounded-full blur-[120px]"></div>
 
-      <div className="absolute bottom-[-150px] right-[-100px] w-[400px] h-[400px] bg-purple-500/10 blur-[140px] rounded-full"></div>
+      <div className="absolute bottom-[-120px] right-[-120px] w-[320px] h-[320px] bg-purple-500/10 rounded-full blur-[120px]"></div>
 
       {/* Main Container */}
-      <div className="w-full max-w-6xl grid lg:grid-cols-2 bg-[#111114]/80 backdrop-blur-2xl border border-zinc-800 rounded-[40px] overflow-hidden shadow-[0_0_80px_rgba(59,130,246,0.08)]">
+      <div className="w-full max-w-6xl h-[92vh] bg-[#111114]/80 backdrop-blur-2xl border border-zinc-800 rounded-[36px] overflow-hidden grid lg:grid-cols-2 shadow-[0_0_80px_rgba(59,130,246,0.08)]">
 
         {/* LEFT SIDE */}
         <div className="hidden lg:flex flex-col justify-between p-10 border-r border-zinc-800 relative overflow-hidden">
 
-          {/* Blur */}
+          {/* Glow */}
           <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 blur-[120px] rounded-full"></div>
 
-          {/* Logo */}
+          {/* Top */}
           <div className="relative z-10">
 
+            {/* Logo */}
             <div className="flex items-center gap-3">
 
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
+              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
 
-                <span className="font-bold text-lg">H</span>
+                <span className="font-bold text-lg">
+                  H
+                </span>
               </div>
 
               <div>
-                <h1 className="text-xl font-bold">
+                <h1 className="text-xl font-bold tracking-tight">
                   HabitFlow
                 </h1>
 
@@ -46,28 +49,36 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Heading */}
+            {/* Hero Text */}
             <div className="mt-20">
 
-              <h2 className="text-5xl font-bold leading-tight">
+              <p className="text-blue-400 text-sm font-medium mb-4">
+                STAY CONSISTENT
+              </p>
 
-                Stay focused.
+              <h2 className="text-5xl font-bold leading-tight tracking-tight">
+
+                Build habits
                 <span className="block text-zinc-500">
-                  Build consistency.
+                  with clarity &
+                </span>
+
+                <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                  focus.
                 </span>
               </h2>
 
               <p className="text-zinc-400 text-lg leading-relaxed mt-6 max-w-md">
 
-                Track habits, improve productivity,
-                and visualize your growth with a
-                clean modern experience.
+                A modern productivity platform designed
+                to help you stay focused and consistent.
               </p>
             </div>
 
-            {/* Stats Cards */}
+            {/* Analytics Cards */}
             <div className="grid grid-cols-2 gap-4 mt-12">
 
+              {/* Card 1 */}
               <div className="bg-[#18181B] border border-zinc-800 rounded-3xl p-5">
 
                 <p className="text-zinc-500 text-sm">
@@ -84,6 +95,7 @@ export default function Login() {
                 </div>
               </div>
 
+              {/* Card 2 */}
               <div className="bg-[#18181B] border border-zinc-800 rounded-3xl p-5">
 
                 <p className="text-zinc-500 text-sm">
@@ -101,169 +113,174 @@ export default function Login() {
             </div>
           </div>
 
-          {/* Bottom Text */}
+          {/* Footer */}
           <p className="text-zinc-600 text-sm relative z-10">
             Trusted by 25,000+ users worldwide.
           </p>
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="p-6 sm:p-10 flex flex-col justify-center">
+        <div className="flex items-center justify-center px-6 sm:px-10 py-8 overflow-hidden">
 
-          {/* Mobile Logo */}
-          <div className="flex lg:hidden items-center gap-3 mb-10">
+          <div className="w-full max-w-md">
 
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+            {/* Mobile Logo */}
+            <div className="flex lg:hidden items-center gap-3 mb-10">
 
-              <span className="font-bold">H</span>
+              <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+
+                <span className="font-bold">
+                  H
+                </span>
+              </div>
+
+              <h1 className="text-xl font-bold">
+                HabitFlow
+              </h1>
             </div>
 
-            <h1 className="text-xl font-bold">
-              HabitFlow
-            </h1>
-          </div>
-
-          {/* Header */}
-          <div>
-
-            <p className="text-zinc-500 text-sm mb-3">
-              WELCOME BACK
-            </p>
-
-            <h2 className="text-4xl font-bold">
-              Sign in to continue
-            </h2>
-
-            <p className="text-zinc-500 mt-4 leading-relaxed">
-              Access your dashboard and continue building better habits.
-            </p>
-          </div>
-
-          {/* Form */}
-          <form className="mt-10 space-y-5">
-
-            {/* Email */}
+            {/* Header */}
             <div>
 
-              <label className="text-sm text-zinc-400 block mb-2">
-                Email
-              </label>
+              <p className="text-zinc-500 text-sm mb-3">
+                WELCOME BACK
+              </p>
 
-              <div className="relative">
+              <h2 className="text-4xl font-bold tracking-tight">
+                Sign in
+              </h2>
 
-                <Mail
-                  size={18}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"
-                />
-
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-4 py-4 outline-none focus:border-blue-500 transition-all"
-                />
-              </div>
+              <p className="text-zinc-500 mt-4 leading-relaxed">
+                Continue building your productivity system.
+              </p>
             </div>
 
-            {/* Password */}
-            <div>
+            {/* Form */}
+            <form className="mt-10 space-y-5">
 
-              <label className="text-sm text-zinc-400 block mb-2">
-                Password
-              </label>
+              {/* Email */}
+              <div>
 
-              <div className="relative">
+                <label className="text-sm text-zinc-400 block mb-2">
+                  Email
+                </label>
 
-                <Lock
-                  size={18}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"
-                />
+                <div className="relative">
 
-                <input
-                  type="password"
-                  placeholder="Enter your password"
-                  className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-4 py-4 outline-none focus:border-purple-500 transition-all"
-                />
+                  <Mail
+                    size={18}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"
+                  />
+
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-4 py-4 outline-none focus:border-blue-500 transition-all"
+                  />
+                </div>
               </div>
+
+              {/* Password */}
+              <div>
+
+                <label className="text-sm text-zinc-400 block mb-2">
+                  Password
+                </label>
+
+                <div className="relative">
+
+                  <Lock
+                    size={18}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"
+                  />
+
+                  <input
+                    type="password"
+                    placeholder="Enter your password"
+                    className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-4 py-4 outline-none focus:border-purple-500 transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* Remember */}
+              <div className="flex items-center justify-between text-sm">
+
+                <label className="flex items-center gap-2 text-zinc-500">
+
+                  <input
+                    type="checkbox"
+                    className="accent-blue-500"
+                  />
+
+                  Remember me
+                </label>
+
+                <Link
+                  to="/forgot-password"
+                  className="text-blue-400 hover:text-blue-300 transition"
+                >
+                  Forgot password?
+                </Link>
+              </div>
+
+              {/* Submit */}
+              <button
+                type="submit"
+                className="w-full bg-white text-black rounded-2xl py-4 font-semibold flex items-center justify-center gap-2 hover:bg-zinc-200 transition-all"
+              >
+                Sign In
+
+                <ArrowRight size={18} />
+              </button>
+            </form>
+
+            {/* Divider */}
+            <div className="flex items-center gap-4 my-8">
+
+              <div className="flex-1 h-[1px] bg-zinc-800"></div>
+
+              <span className="text-zinc-500 text-sm">
+                OR CONTINUE WITH
+              </span>
+
+              <div className="flex-1 h-[1px] bg-zinc-800"></div>
             </div>
 
-            {/* Remember */}
-            <div className="flex items-center justify-between text-sm">
+            {/* Social */}
+            <div className="grid grid-cols-2 gap-4">
 
-              <label className="flex items-center gap-2 text-zinc-500">
+              <button className="bg-[#18181B] border border-zinc-800 rounded-2xl py-4 flex items-center justify-center gap-3 hover:bg-zinc-800 transition-all">
 
-                <input
-                  type="checkbox"
-                  className="accent-blue-500"
-                />
+                <FaGoogle className="text-red-500" />
 
-                Remember me
-              </label>
+                <span className="font-medium">
+                  Google
+                </span>
+              </button>
+
+              <button className="bg-white border border-[#EEF2F0] py-3.5 rounded-2xl flex items-center justify-center gap-2 hover:bg-gray-50 transition">
+
+                <FaApple />
+
+                <span className="text-sm font-medium text-gray-700">
+                  Apple
+                </span>
+              </button>
+            </div>
+
+            {/* Footer */}
+            <p className="text-center text-sm text-gray-500 mt-8">
+
+              Don’t have an account?{" "}
 
               <Link
-                to="/forgot-password"
-                className="text-blue-400 hover:text-blue-300 transition"
+                to="/signup"
+                className="text-white hover:text-blue-400 transition"
               >
-                Forgot password?
+                Create account
               </Link>
-            </div>
-
-            {/* Button */}
-            <button
-              type="submit"
-              className="w-full bg-white text-black rounded-2xl py-4 font-semibold flex items-center justify-center gap-2 hover:bg-zinc-200 transition-all"
-            >
-              Sign In
-
-              <ArrowRight size={18} />
-            </button>
-          </form>
-
-          {/* Divider */}
-          <div className="flex items-center gap-4 my-8">
-
-            <div className="flex-1 h-[1px] bg-zinc-800"></div>
-
-            <span className="text-zinc-500 text-sm">
-              OR CONTINUE WITH
-            </span>
-
-            <div className="flex-1 h-[1px] bg-zinc-800"></div>
+            </p>
           </div>
-
-          {/* Social Login */}
-          <div className="grid grid-cols-2 gap-4">
-
-            <button className="bg-[#18181B] border border-zinc-800 rounded-2xl py-4 flex items-center justify-center gap-3 hover:bg-zinc-800 transition-all">
-
-              <FaGoogle className="text-red-500" />
-
-              <span className="font-medium">
-                Google
-              </span>
-            </button>
-
-            <button className="bg-white border border-[#EEF2F0] py-3.5 rounded-2xl flex items-center justify-center gap-2 hover:bg-gray-50 transition">
-
-              <FaApple />
-
-              <span className="text-sm font-medium text-gray-700">
-                Apple
-              </span>
-            </button>
-          </div>
-
-          {/* Footer */}
-          <p className="text-center text-sm text-gray-500 mt-8">
-
-            Don’t have an account?{" "}
-
-            <Link
-              to="/signup"
-              className="text-white hover:text-blue-400 transition"
-            >
-              Create account
-            </Link>
-          </p>
         </div>
       </div>
     </div>
