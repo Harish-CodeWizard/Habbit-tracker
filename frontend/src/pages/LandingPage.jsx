@@ -24,32 +24,32 @@ const LandingPage = () => {
       <div className="absolute bottom-[-200px] right-[-100px] w-[450px] h-[450px] bg-purple-500/10 blur-[140px] rounded-full"></div>
 
       {/* Navbar */}
-      <nav className="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between relative z-10">
+      <nav className="max-w-7xl mx-auto px-6 py-10 flex items-center justify-between relative z-10 border-b border-zinc-800/30">
 
         <div className="flex items-center gap-4">
 
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20 flex-shrink-0">
 
             <Flame size={24} className="text-white" />
           </div>
 
-          <h1 className="text-2xl font-bold tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight hidden sm:block">
             HabitFlow
           </h1>
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
 
           <Link
             to="/login"
-            className="text-zinc-400 hover:text-white transition duration-300"
+            className="text-zinc-400 hover:text-white transition duration-300 text-sm sm:text-base"
           >
             Login
           </Link>
 
           <Link
             to="/signup"
-            className="bg-white text-black px-6 py-3 rounded-2xl font-semibold hover:bg-zinc-200 transition duration-300 shadow-lg"
+            className="bg-white text-black px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl font-semibold hover:bg-zinc-200 transition duration-300 shadow-lg text-sm sm:text-base whitespace-nowrap"
           >
             Get Started
           </Link>
@@ -57,7 +57,7 @@ const LandingPage = () => {
       </nav>
 
       {/* Hero */}
-      <section className="max-w-7xl mx-auto px-6 pt-12 lg:pt-32 pb-20">
+      <section className="max-w-7xl mx-auto px-6 pt-20 lg:pt-40 pb-20">
 
         <div className="grid lg:grid-cols-2 gap-20 items-center">
 

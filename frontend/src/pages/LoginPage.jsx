@@ -9,70 +9,143 @@ import { FaGoogle, FaApple } from "react-icons/fa";
 
 export default function Login() {
   return (
-    <div className="min-h-screen bg-[#F6F7F5] flex items-center justify-center px-4 overflow-hidden relative">
+    <div className="min-h-screen bg-[#0B0B0F] text-white overflow-hidden relative flex items-center justify-center px-4">
 
-      {/* Background Blurs */}
-      <div className="absolute top-[-120px] left-[-120px] w-72 h-72 bg-[#DDEEE9] rounded-full blur-3xl opacity-50"></div>
+      {/* Background Glow */}
+      <div className="absolute top-[-150px] left-[-100px] w-[350px] h-[350px] bg-blue-500/10 blur-[120px] rounded-full"></div>
 
-      <div className="absolute bottom-[-120px] right-[-120px] w-80 h-80 bg-[#E7F2EE] rounded-full blur-3xl opacity-50"></div>
+      <div className="absolute bottom-[-150px] right-[-100px] w-[400px] h-[400px] bg-purple-500/10 blur-[140px] rounded-full"></div>
 
-      {/* Main Card */}
-      <div className="relative w-full max-w-md bg-white border border-[#EEF2F0] rounded-[36px] shadow-[0_20px_80px_rgba(0,0,0,0.08)] overflow-hidden">
+      {/* Main Container */}
+      <div className="w-full max-w-6xl grid lg:grid-cols-2 bg-[#111114]/80 backdrop-blur-2xl border border-zinc-800 rounded-[40px] overflow-hidden shadow-[0_0_80px_rgba(59,130,246,0.08)]">
 
-        {/* Top Section */}
-        <div className="bg-[#23352F] px-6 pt-10 pb-24 relative">
+        {/* LEFT SIDE */}
+        <div className="hidden lg:flex flex-col justify-between p-10 border-r border-zinc-800 relative overflow-hidden">
 
-          {/* Floating Badge */}
-          <div className="absolute top-5 right-5 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full">
+          {/* Blur */}
+          <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 blur-[120px] rounded-full"></div>
 
-            <p className="text-white text-xs font-medium">
-              Welcome Back 👋
-            </p>
-          </div>
+          {/* Logo */}
+          <div className="relative z-10">
 
-          <h1 className="text-4xl font-bold text-white leading-tight">
-            Log in to your account
-          </h1>
+            <div className="flex items-center gap-3">
 
-          <p className="text-white/70 mt-3 text-sm leading-relaxed">
-            Build consistency and stay productive every day.
-          </p>
+              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
 
-          {/* Floating Analytics Card */}
-          <div className="absolute left-1/2 -translate-x-1/2 -bottom-12 w-[88%] bg-white rounded-3xl shadow-2xl border border-[#EEF2F0] p-5">
-
-            <div className="flex items-center justify-between">
-
-              <div>
-                <p className="text-sm text-gray-400">
-                  Today's Progress
-                </p>
-
-                <h2 className="text-3xl font-bold text-[#23352F] mt-1">
-                  82%
-                </h2>
+                <span className="font-bold text-lg">H</span>
               </div>
 
-              {/* Circle */}
-              <div className="relative w-16 h-16">
+              <div>
+                <h1 className="text-xl font-bold">
+                  HabitFlow
+                </h1>
 
-                <div className="absolute inset-0 rounded-full border-[6px] border-[#DDEEE9]"></div>
+                <p className="text-zinc-500 text-sm">
+                  Productivity Platform
+                </p>
+              </div>
+            </div>
 
-                <div className="absolute inset-0 rounded-full border-[6px] border-transparent border-t-[#23352F] border-r-[#23352F] rotate-45"></div>
+            {/* Heading */}
+            <div className="mt-20">
+
+              <h2 className="text-5xl font-bold leading-tight">
+
+                Stay focused.
+                <span className="block text-zinc-500">
+                  Build consistency.
+                </span>
+              </h2>
+
+              <p className="text-zinc-400 text-lg leading-relaxed mt-6 max-w-md">
+
+                Track habits, improve productivity,
+                and visualize your growth with a
+                clean modern experience.
+              </p>
+            </div>
+
+            {/* Stats Cards */}
+            <div className="grid grid-cols-2 gap-4 mt-12">
+
+              <div className="bg-[#18181B] border border-zinc-800 rounded-3xl p-5">
+
+                <p className="text-zinc-500 text-sm">
+                  Productivity
+                </p>
+
+                <h3 className="text-4xl font-bold mt-3">
+                  82%
+                </h3>
+
+                <div className="w-full h-2 bg-zinc-800 rounded-full mt-5 overflow-hidden">
+
+                  <div className="w-[82%] h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                </div>
+              </div>
+
+              <div className="bg-[#18181B] border border-zinc-800 rounded-3xl p-5">
+
+                <p className="text-zinc-500 text-sm">
+                  Habit Streak
+                </p>
+
+                <h3 className="text-4xl font-bold mt-3">
+                  12
+                </h3>
+
+                <p className="text-zinc-500 text-sm mt-2">
+                  Days Consistent
+                </p>
               </div>
             </div>
           </div>
+
+          {/* Bottom Text */}
+          <p className="text-zinc-600 text-sm relative z-10">
+            Trusted by 25,000+ users worldwide.
+          </p>
         </div>
 
-        {/* Form */}
-        <div className="px-6 pt-20 pb-8">
+        {/* RIGHT SIDE */}
+        <div className="p-6 sm:p-10 flex flex-col justify-center">
 
-          <form className="space-y-5">
+          {/* Mobile Logo */}
+          <div className="flex lg:hidden items-center gap-3 mb-10">
+
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+
+              <span className="font-bold">H</span>
+            </div>
+
+            <h1 className="text-xl font-bold">
+              HabitFlow
+            </h1>
+          </div>
+
+          {/* Header */}
+          <div>
+
+            <p className="text-zinc-500 text-sm mb-3">
+              WELCOME BACK
+            </p>
+
+            <h2 className="text-4xl font-bold">
+              Sign in to continue
+            </h2>
+
+            <p className="text-zinc-500 mt-4 leading-relaxed">
+              Access your dashboard and continue building better habits.
+            </p>
+          </div>
+
+          {/* Form */}
+          <form className="mt-10 space-y-5">
 
             {/* Email */}
             <div>
 
-              <label className="block text-sm font-medium text-gray-600 mb-2">
+              <label className="text-sm text-zinc-400 block mb-2">
                 Email
               </label>
 
@@ -80,13 +153,13 @@ export default function Login() {
 
                 <Mail
                   size={18}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"
                 />
 
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full bg-[#F8F8F8] border border-transparent focus:border-[#23352F] focus:ring-4 focus:ring-[#23352F]/10 outline-none rounded-2xl pl-12 pr-4 py-3.5 text-sm transition-all"
+                  className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-4 py-4 outline-none focus:border-blue-500 transition-all"
                 />
               </div>
             </div>
@@ -94,7 +167,7 @@ export default function Login() {
             {/* Password */}
             <div>
 
-              <label className="block text-sm font-medium text-gray-600 mb-2">
+              <label className="text-sm text-zinc-400 block mb-2">
                 Password
               </label>
 
@@ -102,13 +175,13 @@ export default function Login() {
 
                 <Lock
                   size={18}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"
                 />
 
                 <input
                   type="password"
                   placeholder="Enter your password"
-                  className="w-full bg-[#F8F8F8] border border-transparent focus:border-[#23352F] focus:ring-4 focus:ring-[#23352F]/10 outline-none rounded-2xl pl-12 pr-4 py-3.5 text-sm transition-all"
+                  className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-4 py-4 outline-none focus:border-purple-500 transition-all"
                 />
               </div>
             </div>
@@ -116,11 +189,11 @@ export default function Login() {
             {/* Remember */}
             <div className="flex items-center justify-between text-sm">
 
-              <label className="flex items-center gap-2 text-gray-500">
+              <label className="flex items-center gap-2 text-zinc-500">
 
                 <input
                   type="checkbox"
-                  className="accent-[#23352F]"
+                  className="accent-blue-500"
                 />
 
                 Remember me
@@ -128,16 +201,16 @@ export default function Login() {
 
               <Link
                 to="/forgot-password"
-                className="text-[#23352F] font-semibold"
+                className="text-blue-400 hover:text-blue-300 transition"
               >
-                Forgot?
+                Forgot password?
               </Link>
             </div>
 
-            {/* Login Button */}
+            {/* Button */}
             <button
               type="submit"
-              className="w-full bg-[#23352F] text-white py-4 rounded-2xl font-semibold flex items-center justify-center gap-2 shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+              className="w-full bg-white text-black rounded-2xl py-4 font-semibold flex items-center justify-center gap-2 hover:bg-zinc-200 transition-all"
             >
               Sign In
 
@@ -146,25 +219,25 @@ export default function Login() {
           </form>
 
           {/* Divider */}
-          <div className="flex items-center gap-3 py-6">
+          <div className="flex items-center gap-4 my-8">
 
-            <div className="flex-1 h-[1px] bg-gray-200"></div>
+            <div className="flex-1 h-[1px] bg-zinc-800"></div>
 
-            <span className="text-xs text-gray-400">
+            <span className="text-zinc-500 text-sm">
               OR CONTINUE WITH
             </span>
 
-            <div className="flex-1 h-[1px] bg-gray-200"></div>
+            <div className="flex-1 h-[1px] bg-zinc-800"></div>
           </div>
 
-          {/* Social Buttons */}
+          {/* Social Login */}
           <div className="grid grid-cols-2 gap-4">
 
-            <button className="bg-white border border-[#EEF2F0] py-3.5 rounded-2xl flex items-center justify-center gap-2 hover:bg-gray-50 transition">
+            <button className="bg-[#18181B] border border-zinc-800 rounded-2xl py-4 flex items-center justify-center gap-3 hover:bg-zinc-800 transition-all">
 
               <FaGoogle className="text-red-500" />
 
-              <span className="text-sm font-medium text-gray-700">
+              <span className="font-medium">
                 Google
               </span>
             </button>
@@ -186,9 +259,9 @@ export default function Login() {
 
             <Link
               to="/signup"
-              className="text-[#23352F] font-bold"
+              className="text-white hover:text-blue-400 transition"
             >
-              Sign up
+              Create account
             </Link>
           </p>
         </div>
