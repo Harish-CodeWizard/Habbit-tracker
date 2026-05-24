@@ -1,46 +1,86 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Mail,
   Lock,
   User,
   ArrowRight,
+  Eye,
+  EyeOff,
+  Flame,
 } from "lucide-react";
-import { FaGoogle, FaApple } from "react-icons/fa";
+
+import { FaGoogle } from "react-icons/fa";
 
 export default function SignupPage() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState(false);
+
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    termsAccepted: false,
+  });
+
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]:
+        type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  };
+
   return (
-    <div className="h-screen overflow-hidden bg-[#0B0B0F] text-white flex items-center justify-center px-4 relative">
+    <div className="min-h-screen bg-[#07070A] text-white overflow-x-hidden relative flex items-center justify-center p-4">
 
       {/* Background Glow */}
-      <div className="absolute top-[-120px] left-[-120px] w-[320px] h-[320px] bg-blue-500/10 rounded-full blur-[120px]"></div>
+      <div className="absolute top-[-120px] left-[-120px] w-[220px] h-[220px] bg-blue-500/10 rounded-full blur-[100px]"></div>
 
-      <div className="absolute bottom-[-120px] right-[-120px] w-[320px] h-[320px] bg-purple-500/10 rounded-full blur-[120px]"></div>
+      <div className="absolute bottom-[-120px] right-[-120px] w-[220px] h-[220px] bg-purple-500/10 rounded-full blur-[100px]"></div>
 
       {/* Main Container */}
-      <div className="w-full max-w-6xl h-[92vh] bg-[#111114]/80 backdrop-blur-2xl border border-zinc-800 rounded-[36px] overflow-hidden grid lg:grid-cols-2 shadow-[0_0_80px_rgba(59,130,246,0.08)]">
+      <div className="relative z-10 w-full max-w-6xl min-h-[90vh] bg-[#111114]/80 backdrop-blur-2xl border border-zinc-800 rounded-[28px] overflow-hidden grid lg:grid-cols-2">
 
         {/* LEFT SIDE */}
-        <div className="hidden lg:flex flex-col justify-between p-10 border-r border-zinc-800 relative overflow-hidden">
+        <div className="hidden lg:flex flex-col justify-between p-8 xl:p-10 border-r border-zinc-800 relative overflow-hidden">
 
-          {/* Glow */}
-          <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 blur-[120px] rounded-full"></div>
+          {/* Inner Glow */}
+          <div className="absolute top-20 left-10 w-60 h-60 bg-blue-500/10 rounded-full blur-[100px]"></div>
 
-          {/* Top */}
           <div className="relative z-10">
 
             {/* Logo */}
             <div className="flex items-center gap-3">
 
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
 
-                <span className="font-bold text-lg">
-                  H
-                </span>
+                <Flame
+                  size={18}
+                  className="text-white"
+                />
               </div>
 
               <div>
-                <h1 className="text-xl font-bold tracking-tight">
+                <h1 className="text-2xl font-bold">
                   HabitFlow
                 </h1>
 
@@ -50,63 +90,65 @@ export default function SignupPage() {
               </div>
             </div>
 
-            {/* Hero Text */}
-            <div className="mt-20">
+            {/* Hero */}
+            <div className="mt-12">
 
-              <p className="text-blue-400 text-sm font-medium mb-4">
-                GET STARTED TODAY
+              <p className="text-blue-400 text-xs tracking-[3px] font-semibold mb-4">
+
+                GET STARTED
               </p>
 
-              <h2 className="text-5xl font-bold leading-tight tracking-tight">
+              <h2 className="text-[52px] xl:text-[64px] font-bold leading-[0.95] tracking-tight">
 
                 Start your
-                <span className="block text-zinc-500">
+
+                <span className="block text-zinc-500 mt-2">
                   productivity
                 </span>
 
-                <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                <span className="block bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mt-2">
+
                   journey.
                 </span>
               </h2>
 
-              <p className="text-zinc-400 text-lg leading-relaxed mt-6 max-w-md">
+              <p className="text-zinc-400 text-base leading-relaxed mt-6 max-w-[420px]">
 
-                Join thousands of users building better habits
-                and staying consistent every day.
+                Build better routines, track your
+                progress, and stay consistent every
+                single day with HabitFlow.
               </p>
             </div>
 
-            {/* Analytics Cards */}
-            <div className="grid grid-cols-2 gap-4 mt-12">
+            {/* Stats */}
+            <div className="grid grid-cols-2 gap-4 mt-10">
 
-              {/* Card 1 */}
               <div className="bg-[#18181B] border border-zinc-800 rounded-3xl p-5">
 
                 <p className="text-zinc-500 text-sm">
                   Active Users
                 </p>
 
-                <h3 className="text-4xl font-bold mt-3">
+                <h3 className="text-3xl font-bold mt-2">
                   25K+
                 </h3>
 
-                <p className="text-zinc-500 text-sm mt-2">
+                <p className="text-zinc-500 text-sm mt-1">
                   Worldwide
                 </p>
               </div>
 
-              {/* Card 2 */}
               <div className="bg-[#18181B] border border-zinc-800 rounded-3xl p-5">
 
                 <p className="text-zinc-500 text-sm">
                   Success Rate
                 </p>
 
-                <h3 className="text-4xl font-bold mt-3">
+                <h3 className="text-3xl font-bold mt-2">
                   94%
                 </h3>
 
-                <p className="text-zinc-500 text-sm mt-2">
+                <p className="text-zinc-500 text-sm mt-1">
                   Goal Completion
                 </p>
               </div>
@@ -114,54 +156,83 @@ export default function SignupPage() {
           </div>
 
           {/* Footer */}
-          <p className="text-zinc-600 text-sm relative z-10">
-            Free to start. Premium features available.
+          <p className="text-zinc-600 text-sm relative z-10 mt-8">
+
+            Free to start • Premium features available
           </p>
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="flex items-center justify-center px-6 sm:px-10 py-8 overflow-hidden">
+        <div className="flex items-center justify-center px-5 sm:px-8 py-8 overflow-y-auto">
 
           <div className="w-full max-w-md">
 
             {/* Mobile Logo */}
-            <div className="flex lg:hidden items-center gap-3 mb-10">
+            <div className="flex lg:hidden items-center justify-center gap-3 mb-8">
 
               <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
 
-                <span className="font-bold">
-                  H
-                </span>
+                <Flame
+                  size={18}
+                  className="text-white"
+                />
               </div>
 
-              <h1 className="text-xl font-bold">
+              <h1 className="text-2xl font-bold">
                 HabitFlow
               </h1>
             </div>
 
             {/* Header */}
-            <div>
+            <div className="mb-7">
 
-              <p className="text-zinc-500 text-sm mb-3">
-                JOIN US TODAY
+              <p className="text-zinc-500 text-xs tracking-[3px] mb-3">
+
+                CREATE ACCOUNT
               </p>
 
-              <h2 className="text-4xl font-bold tracking-tight">
-                Create account
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+
+                Join HabitFlow
               </h2>
 
-              <p className="text-zinc-500 mt-4 leading-relaxed">
-                Start building better habits right now.
+              <p className="text-zinc-500 mt-3 text-sm sm:text-base">
+
+                Start building better habits today.
               </p>
             </div>
 
-            {/* Form */}
-            <form className="mt-8 space-y-4">
+            {/* Google */}
+            <button className="w-full bg-white text-black rounded-2xl py-3.5 flex items-center justify-center gap-3 font-semibold hover:bg-zinc-200 transition-all duration-300">
 
-              {/* Name */}
+              <FaGoogle className="text-red-500" />
+
+              Continue with Google
+            </button>
+
+            {/* Divider */}
+            <div className="flex items-center gap-4 my-6">
+
+              <div className="flex-1 h-[1px] bg-zinc-800"></div>
+
+              <span className="text-zinc-500 text-sm">
+                OR
+              </span>
+
+              <div className="flex-1 h-[1px] bg-zinc-800"></div>
+            </div>
+
+            {/* Form */}
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-4"
+            >
+
+              {/* Full Name */}
               <div>
 
                 <label className="text-sm text-zinc-400 block mb-2">
+
                   Full Name
                 </label>
 
@@ -174,8 +245,11 @@ export default function SignupPage() {
 
                   <input
                     type="text"
+                    name="fullName"
                     placeholder="Enter your name"
-                    className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-4 py-3.5 outline-none focus:border-blue-500 transition-all text-sm"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-4 py-3.5 outline-none focus:border-blue-500 transition-all"
                   />
                 </div>
               </div>
@@ -184,7 +258,8 @@ export default function SignupPage() {
               <div>
 
                 <label className="text-sm text-zinc-400 block mb-2">
-                  Email
+
+                  Email Address
                 </label>
 
                 <div className="relative">
@@ -196,8 +271,11 @@ export default function SignupPage() {
 
                   <input
                     type="email"
+                    name="email"
                     placeholder="Enter your email"
-                    className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-4 py-3.5 outline-none focus:border-blue-500 transition-all text-sm"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-4 py-3.5 outline-none focus:border-blue-500 transition-all"
                   />
                 </div>
               </div>
@@ -206,6 +284,7 @@ export default function SignupPage() {
               <div>
 
                 <label className="text-sm text-zinc-400 block mb-2">
+
                   Password
                 </label>
 
@@ -217,10 +296,33 @@ export default function SignupPage() {
                   />
 
                   <input
-                    type="password"
-                    placeholder="Create a password"
-                    className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-4 py-3.5 outline-none focus:border-purple-500 transition-all text-sm"
+                    type={
+                      showPassword
+                        ? "text"
+                        : "password"
+                    }
+                    name="password"
+                    placeholder="Create password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-12 py-3.5 outline-none focus:border-purple-500 transition-all"
                   />
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setShowPassword(
+                        !showPassword
+                      )
+                    }
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white"
+                  >
+                    {showPassword ? (
+                      <EyeOff size={18} />
+                    ) : (
+                      <Eye size={18} />
+                    )}
+                  </button>
                 </div>
               </div>
 
@@ -228,6 +330,7 @@ export default function SignupPage() {
               <div>
 
                 <label className="text-sm text-zinc-400 block mb-2">
+
                   Confirm Password
                 </label>
 
@@ -239,28 +342,67 @@ export default function SignupPage() {
                   />
 
                   <input
-                    type="password"
-                    placeholder="Confirm your password"
-                    className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-4 py-3.5 outline-none focus:border-purple-500 transition-all text-sm"
+                    type={
+                      showConfirmPassword
+                        ? "text"
+                        : "password"
+                    }
+                    name="confirmPassword"
+                    placeholder="Confirm password"
+                    value={
+                      formData.confirmPassword
+                    }
+                    onChange={handleChange}
+                    className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-12 py-3.5 outline-none focus:border-purple-500 transition-all"
                   />
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setShowConfirmPassword(
+                        !showConfirmPassword
+                      )
+                    }
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white"
+                  >
+                    {showConfirmPassword ? (
+                      <EyeOff size={18} />
+                    ) : (
+                      <Eye size={18} />
+                    )}
+                  </button>
                 </div>
               </div>
 
               {/* Terms */}
-              <label className="flex items-start gap-2 text-zinc-400 text-sm mt-4">
+              <label className="flex items-start gap-3 text-sm text-zinc-400 bg-[#18181B] border border-zinc-800 rounded-2xl p-4">
 
                 <input
                   type="checkbox"
+                  name="termsAccepted"
+                  checked={
+                    formData.termsAccepted
+                  }
+                  onChange={handleChange}
                   className="accent-blue-500 mt-1"
                 />
 
                 <span>
                   I agree to the{" "}
-                  <a href="#" className="text-blue-400 hover:text-blue-300">
-                    Terms of Service
+
+                  <a
+                    href="#"
+                    className="text-blue-400 hover:text-blue-300"
+                  >
+                    Terms
                   </a>{" "}
+
                   and{" "}
-                  <a href="#" className="text-blue-400 hover:text-blue-300">
+
+                  <a
+                    href="#"
+                    className="text-blue-400 hover:text-blue-300"
+                  >
                     Privacy Policy
                   </a>
                 </span>
@@ -269,58 +411,35 @@ export default function SignupPage() {
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-white text-black rounded-2xl py-3.5 font-semibold flex items-center justify-center gap-2 hover:bg-zinc-200 transition-all mt-6"
+                disabled={isLoading}
+                className={`w-full rounded-2xl py-3.5 font-semibold flex items-center justify-center gap-2 transition-all duration-300 ${
+                  isLoading
+                    ? "bg-zinc-700 text-zinc-400"
+                    : "bg-gradient-to-r from-blue-500 to-purple-600 hover:opacity-90"
+                }`}
               >
-                Create Account
+                {isLoading ? (
+                  "Creating Account..."
+                ) : (
+                  <>
+                    Create Account
 
-                <ArrowRight size={18} />
+                    <ArrowRight size={18} />
+                  </>
+                )}
               </button>
             </form>
 
-            {/* Divider */}
-            <div className="flex items-center gap-4 my-6">
-
-              <div className="flex-1 h-[1px] bg-zinc-800"></div>
-
-              <span className="text-zinc-500 text-sm">
-                OR SIGN UP WITH
-              </span>
-
-              <div className="flex-1 h-[1px] bg-zinc-800"></div>
-            </div>
-
-            {/* Social */}
-            <div className="grid grid-cols-2 gap-4">
-
-              <button className="bg-[#18181B] border border-zinc-800 rounded-2xl py-3.5 flex items-center justify-center gap-2 hover:bg-zinc-800 transition-all">
-
-                <FaGoogle className="text-red-500" />
-
-                <span className="font-medium text-sm">
-                  Google
-                </span>
-              </button>
-
-              <button className="bg-white border border-[#EEF2F0] py-3.5 rounded-2xl flex items-center justify-center gap-2 hover:bg-gray-50 transition">
-
-                <FaApple />
-
-                <span className="text-sm font-medium text-gray-700">
-                  Apple
-                </span>
-              </button>
-            </div>
-
             {/* Footer */}
-            <p className="text-center text-sm text-gray-500 mt-6">
+            <p className="text-center text-zinc-500 text-sm mt-6">
 
               Already have an account?{" "}
 
               <Link
                 to="/login"
-                className="text-white hover:text-blue-400 transition"
+                className="text-white hover:text-blue-400 transition font-medium"
               >
-                Sign in
+                Sign In
               </Link>
             </p>
           </div>

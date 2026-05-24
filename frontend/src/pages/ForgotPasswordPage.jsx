@@ -1,11 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Mail,
   ArrowRight,
+  AlertCircle,
+  CheckCircle,
 } from "lucide-react";
 
 export default function ForgotPasswordPage() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const validateEmail = () => {
+    if (!email.trim()) {
+      setError("Email is required");
+      return false;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError("Please enter a valid email address");
+      return false;
+    }
+    return true;
+  };
+
+  const handleChange = (e) => {
+    setEmail(e.target.value);
+    if (error) {
+      setError("");
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!validateEmail()) {
+      return;
+    }
+
+    setIsLoading(true);
+    setError("");
+
+    try {
+      // TODO: Replace with actual API call
+      // const response = await fetch('/api/auth/forgot-password', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ email })
+      // });
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      setSuccessMessage(`Password reset link sent to ${email}. Check your email to reset your password.`);
+      setEmail("");
+      
+      // Reset message after 5 seconds
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 5000);
+    } catch (err) {
+      setError("Failed to send reset link. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="h-screen overflow-hidden bg-[#0B0B0F] text-white flex items-center justify-center px-4 relative">
 
@@ -129,7 +190,23 @@ export default function ForgotPasswordPage() {
             </div>
 
             {/* Form */}
-            <form className="mt-10 space-y-6">
+            <form className="mt-10 space-y-6" onSubmit={handleSubmit}>
+
+              {/* Error Alert */}
+              {error && (
+                <div className="bg-red-500/10 border border-red-500/30 rounded-2xl p-4 flex items-center gap-2">
+                  <AlertCircle size={20} className="text-red-400 flex-shrink-0" />
+                  <span className="text-sm text-red-400">{error}</span>
+                </div>
+              )}
+
+              {/* Success Alert */}
+              {successMessage && (
+                <div className="bg-green-500/10 border border-green-500/30 rounded-2xl p-4 flex items-start gap-2">
+                  <CheckCircle size={20} className="text-green-400 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm text-green-400">{successMessage}</span>
+                </div>
+              )}
 
               {/* Email */}
               <div>
@@ -148,26 +225,42 @@ export default function ForgotPasswordPage() {
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-4 py-4 outline-none focus:border-blue-500 transition-all"
+                    value={email}
+                    onChange={handleChange}
+                    className={`w-full bg-[#18181B] border rounded-2xl pl-12 pr-4 py-4 outline-none transition-all ${
+                      error
+                        ? "border-red-500 focus:border-red-500"
+                        : "border-zinc-800 focus:border-blue-500"
+                    }`}
                   />
                 </div>
+                {error && (
+                  <p className="text-red-400 text-xs mt-2 flex items-center gap-1">
+                    <AlertCircle size={14} /> {error}
+                  </p>
+                )}
               </div>
 
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-white text-black rounded-2xl py-4 font-semibold flex items-center justify-center gap-2 hover:bg-zinc-200 transition-all"
+                disabled={isLoading}
+                className={`w-full rounded-2xl py-4 font-semibold flex items-center justify-center gap-2 transition-all ${
+                  isLoading
+                    ? "bg-zinc-700 text-zinc-400 cursor-not-allowed"
+                    : "bg-white text-black hover:bg-zinc-200"
+                }`}
               >
-                Send Reset Link
+                {isLoading ? "Sending..." : "Send Reset Link"}
 
-                <ArrowRight size={18} />
+                {!isLoading && <ArrowRight size={18} />}
               </button>
 
               {/* Info */}
               <div className="bg-[#18181B] border border-zinc-800 rounded-2xl p-4">
 
                 <p className="text-sm text-zinc-400">
-                  💡 <span className="font-medium">Tip:</span> Check your spam folder if you don't see the email.
+                  💡 <span className="font-medium">Tip:</span> Check your spam folder if you don't see the email. It may take a few minutes to arrive.
                 </p>
               </div>
             </form>

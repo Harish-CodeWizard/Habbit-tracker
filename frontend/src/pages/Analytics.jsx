@@ -1,30 +1,330 @@
-import MainLayout from '../components/layout/MainLayout';
-import ProgressChart from '../components/dashboard/ProgressChart';
+import MainLayout from "../components/layout/MainLayout";
 
-const Analytics = () => (
-	<MainLayout>
-		<div>
-			<h1 className="text-3xl font-bold text-gray-900 mb-6">Analytics</h1>
-			<div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-				<div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center">
-					<div className="text-3xl font-bold text-violet-600">42</div>
-					<p className="text-sm text-gray-600 mt-2">Total Days Tracked</p>
-				</div>
-				<div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center">
-					<div className="text-3xl font-bold text-green-600">87%</div>
-					<p className="text-sm text-gray-600 mt-2">Completion Rate</p>
-				</div>
-				<div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center">
-					<div className="text-3xl font-bold text-orange-600">12</div>
-					<p className="text-sm text-gray-600 mt-2">Current Streak</p>
-				</div>
-			</div>
-			<div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-				<h2 className="text-lg font-semibold text-gray-900 mb-4">Weekly Progress</h2>
-				<ProgressChart />
-			</div>
-		</div>
-	</MainLayout>
-);
+import {
+  TrendingUp,
+  Flame,
+  Target,
+  CalendarDays,
+  BarChart3,
+  Award,
+  CheckCircle2,
+} from "lucide-react";
+
+const weeklyData = [
+  { day: "Mon", value: 65 },
+  { day: "Tue", value: 80 },
+  { day: "Wed", value: 55 },
+  { day: "Thu", value: 95 },
+  { day: "Fri", value: 75 },
+  { day: "Sat", value: 88 },
+  { day: "Sun", value: 92 },
+];
+
+const habits = [
+  {
+    name: "Morning Workout",
+    percentage: "92%",
+    color: "from-blue-500 to-cyan-500",
+  },
+  {
+    name: "Reading",
+    percentage: "84%",
+    color: "from-purple-500 to-pink-500",
+  },
+  {
+    name: "Meditation",
+    percentage: "76%",
+    color: "from-orange-500 to-red-500",
+  },
+  {
+    name: "Deep Work",
+    percentage: "89%",
+    color: "from-green-500 to-emerald-500",
+  },
+];
+
+const Analytics = () => {
+  return (
+    <MainLayout>
+      <div className="min-h-screen bg-[#0B0B0F] text-white p-4 sm:p-6">
+
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+
+          <div>
+            <p className="text-zinc-500 text-sm mb-2">
+              PERFORMANCE OVERVIEW
+            </p>
+
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
+              Analytics
+            </h1>
+          </div>
+
+          <button className="bg-gradient-to-r from-blue-500 to-purple-600 px-5 py-3 rounded-2xl font-medium flex items-center justify-center gap-2 hover:opacity-90 transition-all">
+
+            <CalendarDays size={18} />
+
+            Last 30 Days
+          </button>
+        </div>
+
+        {/* Top Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
+
+          {/* Card 1 */}
+          <div className="bg-[#111114] border border-zinc-800 rounded-3xl p-6">
+
+            <div className="w-12 h-12 rounded-2xl bg-blue-500/20 flex items-center justify-center mb-5">
+
+              <BarChart3
+                size={22}
+                className="text-blue-400"
+              />
+            </div>
+
+            <p className="text-zinc-500 text-sm">
+              Total Days Tracked
+            </p>
+
+            <h2 className="text-4xl font-bold mt-2">
+              42
+            </h2>
+          </div>
+
+          {/* Card 2 */}
+          <div className="bg-[#111114] border border-zinc-800 rounded-3xl p-6">
+
+            <div className="w-12 h-12 rounded-2xl bg-green-500/20 flex items-center justify-center mb-5">
+
+              <CheckCircle2
+                size={22}
+                className="text-green-400"
+              />
+            </div>
+
+            <p className="text-zinc-500 text-sm">
+              Completion Rate
+            </p>
+
+            <h2 className="text-4xl font-bold mt-2">
+              87%
+            </h2>
+          </div>
+
+          {/* Card 3 */}
+          <div className="bg-[#111114] border border-zinc-800 rounded-3xl p-6">
+
+            <div className="w-12 h-12 rounded-2xl bg-orange-500/20 flex items-center justify-center mb-5">
+
+              <Flame
+                size={22}
+                className="text-orange-400"
+              />
+            </div>
+
+            <p className="text-zinc-500 text-sm">
+              Current Streak
+            </p>
+
+            <h2 className="text-4xl font-bold mt-2">
+              12
+            </h2>
+          </div>
+
+          {/* Card 4 */}
+          <div className="bg-[#111114] border border-zinc-800 rounded-3xl p-6">
+
+            <div className="w-12 h-12 rounded-2xl bg-purple-500/20 flex items-center justify-center mb-5">
+
+              <TrendingUp
+                size={22}
+                className="text-purple-400"
+              />
+            </div>
+
+            <p className="text-zinc-500 text-sm">
+              Productivity Score
+            </p>
+
+            <h2 className="text-4xl font-bold mt-2">
+              91%
+            </h2>
+          </div>
+        </div>
+
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+          {/* Weekly Progress */}
+          <div className="xl:col-span-2 bg-[#111114] border border-zinc-800 rounded-[30px] p-6">
+
+            <div className="flex items-center justify-between mb-8">
+
+              <div>
+                <h2 className="text-2xl font-bold">
+                  Weekly Progress
+                </h2>
+
+                <p className="text-zinc-500 text-sm mt-1">
+                  Your consistency this week
+                </p>
+              </div>
+
+              <div className="bg-zinc-900 border border-zinc-800 px-4 py-2 rounded-xl text-sm text-zinc-400">
+                Updated Today
+              </div>
+            </div>
+
+            {/* Chart */}
+            <div className="h-[320px] flex items-end justify-between gap-3">
+
+              {weeklyData.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex-1 flex flex-col items-center gap-3"
+                >
+
+                  <div
+                    style={{
+                      height: `${item.value}%`,
+                    }}
+                    className="w-full rounded-2xl bg-gradient-to-t from-blue-500 to-purple-500 hover:opacity-90 transition-all"
+                  ></div>
+
+                  <span className="text-xs text-zinc-500">
+                    {item.day}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Insights */}
+          <div className="bg-[#111114] border border-zinc-800 rounded-[30px] p-6">
+
+            <div className="flex items-center gap-3 mb-6">
+
+              <Award
+                size={24}
+                className="text-yellow-400"
+              />
+
+              <h2 className="text-2xl font-bold">
+                Insights
+              </h2>
+            </div>
+
+            <div className="space-y-5">
+
+              <div className="bg-[#18181B] border border-zinc-800 rounded-2xl p-5">
+
+                <p className="text-zinc-500 text-sm">
+                  Best Performance Day
+                </p>
+
+                <h3 className="text-3xl font-bold mt-2">
+                  Thursday
+                </h3>
+
+                <p className="text-green-400 text-sm mt-2">
+                  +24% higher productivity
+                </p>
+              </div>
+
+              <div className="bg-[#18181B] border border-zinc-800 rounded-2xl p-5">
+
+                <p className="text-zinc-500 text-sm">
+                  Most Consistent Habit
+                </p>
+
+                <h3 className="text-3xl font-bold mt-2">
+                  Reading
+                </h3>
+
+                <p className="text-blue-400 text-sm mt-2">
+                  Completed 28 days in a row
+                </p>
+              </div>
+
+              <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-2xl p-5">
+
+                <div className="flex items-center gap-3 mb-3">
+
+                  <Target
+                    size={20}
+                    className="text-purple-400"
+                  />
+
+                  <h3 className="font-semibold">
+                    Goal Progress
+                  </h3>
+                </div>
+
+                <div className="w-full h-3 bg-zinc-800 rounded-full overflow-hidden">
+
+                  <div className="w-[78%] h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                </div>
+
+                <p className="text-zinc-400 text-sm mt-3">
+                  78% monthly goal achieved
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Habit Performance */}
+        <div className="mt-6 bg-[#111114] border border-zinc-800 rounded-[30px] p-6">
+
+          <div className="flex items-center justify-between mb-8">
+
+            <div>
+              <h2 className="text-2xl font-bold">
+                Habit Performance
+              </h2>
+
+              <p className="text-zinc-500 text-sm mt-1">
+                Track each habit completion rate
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+            {habits.map((habit, index) => (
+              <div
+                key={index}
+                className="bg-[#18181B] border border-zinc-800 rounded-3xl p-5"
+              >
+
+                <div className="flex items-center justify-between mb-4">
+
+                  <h3 className="font-semibold text-lg">
+                    {habit.name}
+                  </h3>
+
+                  <span className="text-zinc-400 text-sm">
+                    {habit.percentage}
+                  </span>
+                </div>
+
+                <div className="w-full h-3 bg-zinc-800 rounded-full overflow-hidden">
+
+                  <div
+                    style={{
+                      width: habit.percentage,
+                    }}
+                    className={`h-full rounded-full bg-gradient-to-r ${habit.color}`}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </MainLayout>
+  );
+};
 
 export default Analytics;

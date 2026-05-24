@@ -1,45 +1,98 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Mail,
   Lock,
   ArrowRight,
+  Eye,
+  EyeOff,
+  Flame,
 } from "lucide-react";
-import { FaGoogle, FaApple } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
 
 export default function LoginPage() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    rememberMe: false,
+  });
+
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    }
+
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  };
+
   return (
-    <div className="h-screen overflow-hidden bg-[#0B0B0F] text-white flex items-center justify-center px-4 relative">
+    <div className="h-screen overflow-hidden bg-[#07070A] text-white relative flex items-center justify-center px-4">
 
       {/* Background Glow */}
-      <div className="absolute top-[-120px] left-[-120px] w-[320px] h-[320px] bg-blue-500/10 rounded-full blur-[120px]"></div>
+      <div className="absolute top-[-120px] left-[-120px] w-[260px] h-[260px] bg-blue-500/10 rounded-full blur-[120px]"></div>
 
-      <div className="absolute bottom-[-120px] right-[-120px] w-[320px] h-[320px] bg-purple-500/10 rounded-full blur-[120px]"></div>
+      <div className="absolute bottom-[-120px] right-[-120px] w-[260px] h-[260px] bg-purple-500/10 rounded-full blur-[120px]"></div>
 
       {/* Main Container */}
-      <div className="w-full max-w-6xl h-[92vh] bg-[#111114]/80 backdrop-blur-2xl border border-zinc-800 rounded-[36px] overflow-hidden grid lg:grid-cols-2 shadow-[0_0_80px_rgba(59,130,246,0.08)]">
+      <div className="relative z-10 w-full max-w-6xl h-[92vh] bg-[#111114]/80 backdrop-blur-2xl border border-zinc-800 rounded-[30px] overflow-hidden grid lg:grid-cols-2">
 
         {/* LEFT SIDE */}
-        <div className="hidden lg:flex flex-col justify-between p-10 border-r border-zinc-800 relative overflow-hidden">
-
-          {/* Glow */}
-          <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 blur-[120px] rounded-full"></div>
+        <div className="hidden lg:flex flex-col justify-between p-10 border-r border-zinc-800 overflow-hidden">
 
           {/* Top */}
-          <div className="relative z-10">
+          <div>
 
             {/* Logo */}
             <div className="flex items-center gap-3">
 
               <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
 
-                <span className="font-bold text-lg">
-                  H
-                </span>
+                <Flame size={20} className="text-white" />
               </div>
 
               <div>
-                <h1 className="text-xl font-bold tracking-tight">
+                <h1 className="text-2xl font-bold">
                   HabitFlow
                 </h1>
 
@@ -49,34 +102,36 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Hero Text */}
-            <div className="mt-20">
+            {/* Hero */}
+            <div className="mt-12">
 
-              <p className="text-blue-400 text-sm font-medium mb-4">
-                STAY CONSISTENT
+              <p className="text-blue-400 text-xs font-semibold tracking-[3px] mb-4">
+                WELCOME BACK
               </p>
 
-              <h2 className="text-5xl font-bold leading-tight tracking-tight">
+              <h2 className="text-5xl xl:text-6xl font-bold leading-[1.05] tracking-tight">
 
-                Build habits
+                Stay focused.
+
                 <span className="block text-zinc-500">
-                  with clarity &
+                  Build better
                 </span>
 
                 <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                  focus.
+                  habits daily.
                 </span>
               </h2>
 
-              <p className="text-zinc-400 text-lg leading-relaxed mt-6 max-w-md">
+              <p className="text-zinc-400 text-base xl:text-lg leading-relaxed mt-5 max-w-md">
 
-                A modern productivity platform designed
-                to help you stay focused and consistent.
+                Track routines, improve consistency,
+                and achieve your goals with a modern
+                productivity system.
               </p>
             </div>
 
-            {/* Analytics Cards */}
-            <div className="grid grid-cols-2 gap-4 mt-12">
+            {/* Cards */}
+            <div className="grid grid-cols-2 gap-4 mt-10">
 
               {/* Card 1 */}
               <div className="bg-[#18181B] border border-zinc-800 rounded-3xl p-5">
@@ -114,55 +169,73 @@ export default function LoginPage() {
           </div>
 
           {/* Footer */}
-          <p className="text-zinc-600 text-sm relative z-10">
+          <p className="text-zinc-600 text-sm">
             Trusted by 25,000+ users worldwide.
           </p>
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="flex items-center justify-center px-6 sm:px-10 py-8 overflow-hidden">
+        <div className="flex items-center justify-center px-5 sm:px-8 lg:px-12 py-6 overflow-y-auto">
 
           <div className="w-full max-w-md">
 
             {/* Mobile Logo */}
-            <div className="flex lg:hidden items-center gap-3 mb-10">
+            <div className="flex lg:hidden items-center justify-center gap-3 mb-8">
 
               <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
 
-                <span className="font-bold">
-                  H
-                </span>
+                <Flame size={18} className="text-white" />
               </div>
 
-              <h1 className="text-xl font-bold">
+              <h1 className="text-2xl font-bold">
                 HabitFlow
               </h1>
             </div>
 
             {/* Header */}
-            <div>
+            <div className="mb-7">
 
-              <p className="text-zinc-500 text-sm mb-3">
-                WELCOME BACK
+              <p className="text-zinc-500 text-xs tracking-[3px] mb-3">
+                SIGN IN
               </p>
 
-              <h2 className="text-4xl font-bold tracking-tight">
-                Sign in
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+                Welcome back
               </h2>
 
-              <p className="text-zinc-500 mt-4 leading-relaxed">
-                Continue building your productivity system.
+              <p className="text-zinc-500 mt-3 text-sm sm:text-base">
+                Continue your productivity journey.
               </p>
             </div>
 
+            {/* Google Button */}
+            <button className="w-full bg-white text-black rounded-2xl py-3.5 flex items-center justify-center gap-3 font-semibold hover:bg-zinc-200 transition-all duration-300">
+
+              <FaGoogle className="text-red-500" />
+
+              Continue with Google
+            </button>
+
+            {/* Divider */}
+            <div className="flex items-center gap-4 my-6">
+
+              <div className="flex-1 h-[1px] bg-zinc-800"></div>
+
+              <span className="text-zinc-500 text-sm">
+                OR
+              </span>
+
+              <div className="flex-1 h-[1px] bg-zinc-800"></div>
+            </div>
+
             {/* Form */}
-            <form className="mt-10 space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4">
 
               {/* Email */}
               <div>
 
                 <label className="text-sm text-zinc-400 block mb-2">
-                  Email
+                  Email Address
                 </label>
 
                 <div className="relative">
@@ -174,10 +247,23 @@ export default function LoginPage() {
 
                   <input
                     type="email"
+                    name="email"
                     placeholder="Enter your email"
-                    className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-4 py-4 outline-none focus:border-blue-500 transition-all"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={`w-full bg-[#18181B] border rounded-2xl pl-12 pr-4 py-3.5 outline-none transition-all ${
+                      errors.email
+                        ? "border-red-500"
+                        : "border-zinc-800 focus:border-blue-500"
+                    }`}
                   />
                 </div>
+
+                {errors.email && (
+                  <p className="text-red-400 text-sm mt-2">
+                    {errors.email}
+                  </p>
+                )}
               </div>
 
               {/* Password */}
@@ -195,20 +281,50 @@ export default function LoginPage() {
                   />
 
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
+                    name="password"
                     placeholder="Enter your password"
-                    className="w-full bg-[#18181B] border border-zinc-800 rounded-2xl pl-12 pr-4 py-4 outline-none focus:border-purple-500 transition-all"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className={`w-full bg-[#18181B] border rounded-2xl pl-12 pr-12 py-3.5 outline-none transition-all ${
+                      errors.password
+                        ? "border-red-500"
+                        : "border-zinc-800 focus:border-purple-500"
+                    }`}
                   />
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setShowPassword(!showPassword)
+                    }
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white transition"
+                  >
+                    {showPassword ? (
+                      <EyeOff size={18} />
+                    ) : (
+                      <Eye size={18} />
+                    )}
+                  </button>
                 </div>
+
+                {errors.password && (
+                  <p className="text-red-400 text-sm mt-2">
+                    {errors.password}
+                  </p>
+                )}
               </div>
 
               {/* Remember */}
-              <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center justify-between text-sm pt-1">
 
-                <label className="flex items-center gap-2 text-zinc-500">
+                <label className="flex items-center gap-2 text-zinc-500 cursor-pointer">
 
                   <input
                     type="checkbox"
+                    name="rememberMe"
+                    checked={formData.rememberMe}
+                    onChange={handleChange}
                     className="accent-blue-500"
                   />
 
@@ -219,65 +335,41 @@ export default function LoginPage() {
                   to="/forgot-password"
                   className="text-blue-400 hover:text-blue-300 transition"
                 >
-                  Forgot password?
+                  Forgot Password?
                 </Link>
               </div>
 
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-white text-black rounded-2xl py-4 font-semibold flex items-center justify-center gap-2 hover:bg-zinc-200 transition-all"
+                disabled={isLoading}
+                className={`w-full rounded-2xl py-3.5 font-semibold flex items-center justify-center gap-2 transition-all duration-300 ${
+                  isLoading
+                    ? "bg-zinc-700 text-zinc-400 cursor-not-allowed"
+                    : "bg-gradient-to-r from-blue-500 to-purple-600 hover:opacity-90"
+                }`}
               >
-                Sign In
-
-                <ArrowRight size={18} />
+                {isLoading ? (
+                  "Signing In..."
+                ) : (
+                  <>
+                    Sign In
+                    <ArrowRight size={18} />
+                  </>
+                )}
               </button>
             </form>
 
-            {/* Divider */}
-            <div className="flex items-center gap-4 my-8">
-
-              <div className="flex-1 h-[1px] bg-zinc-800"></div>
-
-              <span className="text-zinc-500 text-sm">
-                OR CONTINUE WITH
-              </span>
-
-              <div className="flex-1 h-[1px] bg-zinc-800"></div>
-            </div>
-
-            {/* Social */}
-            <div className="grid grid-cols-2 gap-4">
-
-              <button className="bg-[#18181B] border border-zinc-800 rounded-2xl py-4 flex items-center justify-center gap-3 hover:bg-zinc-800 transition-all">
-
-                <FaGoogle className="text-red-500" />
-
-                <span className="font-medium">
-                  Google
-                </span>
-              </button>
-
-              <button className="bg-white border border-[#EEF2F0] py-3.5 rounded-2xl flex items-center justify-center gap-2 hover:bg-gray-50 transition">
-
-                <FaApple />
-
-                <span className="text-sm font-medium text-gray-700">
-                  Apple
-                </span>
-              </button>
-            </div>
-
             {/* Footer */}
-            <p className="text-center text-sm text-gray-500 mt-8">
+            <p className="text-center text-zinc-500 text-sm mt-6">
 
               Don’t have an account?{" "}
 
               <Link
                 to="/signup"
-                className="text-white hover:text-blue-400 transition"
+                className="text-white hover:text-blue-400 transition font-medium"
               >
-                Create account
+                Create Account
               </Link>
             </p>
           </div>
