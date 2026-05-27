@@ -181,7 +181,7 @@ export default function Habits() {
             {/* Habit Cards */}
             <div className="space-y-5">
 
-              {habits.map((habit, index) => (
+              {Array.isArray(habits) && habits.map((habit, index) => (
                 <div
                   key={index}
                   className="bg-[#18181B] border border-zinc-800 rounded-3xl p-5 hover:border-zinc-700 transition-all"

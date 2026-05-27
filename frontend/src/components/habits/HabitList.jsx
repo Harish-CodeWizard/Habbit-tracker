@@ -37,9 +37,16 @@ export default function HabitList() {
         <li key={h.id} className="flex items-center justify-between p-3 border rounded">
           <div>
             <div className="font-medium text-gray-800">{h.title}</div>
-            <div className="text-sm text-gray-500">{h.frequency || 'daily'}</div>
+            <div className="text-sm text-gray-500">Streak: {h.streak || 0} days</div>
+            <div className="text-sm text-gray-500">Completed: {h.percentCompleted || 0}/10</div>
+            {h.reminders && (
+              <div className="text-xs text-blue-500 mt-1">Reminder: {Object.keys(h.reminders).join(', ')}</div>
+            )}
           </div>
-          <div className="text-sm text-gray-500">{h.streak || 0} streak</div>
+          <div className="flex gap-2">
+            <button className="text-blue-600 hover:underline" onClick={() => alert('Edit coming soon')}>Edit</button>
+            <button className="text-red-600 hover:underline" onClick={() => alert('Delete coming soon')}>Delete</button>
+          </div>
         </li>
       ))}
     </ul>

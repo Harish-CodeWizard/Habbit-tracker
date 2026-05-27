@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-	provider = "postgresql"
+	provider = "sqlite"
 	url      = env("DATABASE_URL")
 }
 
@@ -22,6 +22,8 @@ model Habit {
 	description String?
 	streak      Int      @default(0)
 	completed   Boolean  @default(false)
+	percentCompleted Int @default(0) // 0-10 score for completion
+	reminders   Json? // store reminders as JSON (e.g., {"2026-05-26": true})
 
 	userId Int
 	user   User @relation(fields: [userId], references: [id])

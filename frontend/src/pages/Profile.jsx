@@ -1,4 +1,5 @@
 import StreakCard from "../components/dashboard/StreakCard";
+import { useHabits } from "../hooks/useHabits";
 import MainLayout from "../components/layout/MainLayout";
 
 import {
@@ -16,6 +17,7 @@ import {
 } from "lucide-react";
 
 export default function Profile() {
+  const { habits, loading, error } = useHabits();
   return (
     <MainLayout>
       <div className="min-h-screen bg-[#0d1117] text-[#e6edf3] p-3 sm:p-5">
@@ -255,10 +257,20 @@ export default function Profile() {
               </div>
             </div>
 
-            {/* Heatmap */}
+            {/* Heatmap: Show a StreakCard for each habit */}
             <div className="mt-6">
-
-              <StreakCard />
+              {loading && <div className="text-center text-sm text-zinc-400">Loading streaks...</div>}
+              {error && <div className="text-center text-sm text-red-500">Error loading habits</div>}
+              {habits && habits.length === 0 && <div className="text-center text-sm text-zinc-400">No habits yet.</div>}
+              {Array.isArray(habits) && habits.map(habit => (
+                <div key={habit.id} className="mb-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="font-semibold text-lg text-white">{habit.title}</span>
+                    <span className="text-xs text-green-400">Streak: {habit.streak || 0} days</span>
+                  </div>
+                  <StreakCard streak={habit.streak || 0} />
+                </div>
+              ))}
             </div>
 
             {/* Bottom */}
